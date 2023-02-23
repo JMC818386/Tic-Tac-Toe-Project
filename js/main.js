@@ -1,92 +1,122 @@
-//Build a tic-tac-toe game
 
-
-//------------------------Initialize variables------------------------//
-//Visual indicator to show which player's turn it is
+//------------------------Initialize variables/ Render board------------------------//
 
 //appContainer contains entire game in one div
 let gameBoard = document.getElementById("appContainer");
 console.log(gameBoard);
-gameBoard.className = "col-12";
+gameBoard.className = "row d-flex justify-content-center";
 
-//cell0 variable (top left) creates empty div
-let cell0 = document.createElement("h1");
-gameBoard.appendChild(cell0);
-cell0.innerText = ""
-cell0.className = "cell col-4 d-flex justify-content-center align-items-center border border-3";
+let row = document.createElement("div");
+gameBoard.appendChild(row);
+row.className = "row"
+
+//cell0 variable (top left)
+let cell0 = document.createElement("button");
+row.appendChild(cell0);
+cell0.innerText = "";
+cell0.className = "cell col-4 text-center border border-3";
 
 //cell1 variable (top center)
-let cell1 = document.createElement("h1");
-gameBoard.appendChild(cell1);
+let cell1 = document.createElement("button");
+row.appendChild(cell1);
 cell1.innerText = "";
-cell1.className = "cell col-4 d-flex justify-content-center align-items-center border border-4";
+cell1.className = "cell col-4 text-center border border-4";
 
 //cell2 variable (top right)
-let cell2 = document.createElement("h1");
-gameBoard.appendChild(cell2);
-cell2.innerText = ""
-cell2.className = "cell col-4 d-flex justify-content-center align-items-center border border-4";
+let cell2 = document.createElement("button");
+row.appendChild(cell2);
+cell2.innerText = "";
+cell2.className = "cell col-4 text-center border border-4";
 
 //cell3 variable (middle left)
-let cell3 = document.createElement("h1");
-gameBoard.appendChild(cell3);
-cell3.innerText = ""
-cell3.className = "cell col-4 d-flex justify-content-center align-items-center border border-4";
+let cell3 = document.createElement("button");
+row.appendChild(cell3);
+cell3.innerText = "";
+cell3.className = "cell col-4 text-center border border-4";
 
 //cell4 variable (middle center)
-let cell4 = document.createElement("h1");
-gameBoard.appendChild(cell4);
-cell4.innerText = ""
-cell4.className = "cell col-4 d-flex justify-content-center align-items-center border border-4";
+let cell4 = document.createElement("button");
+row.appendChild(cell4);
+cell4.innerText = "";
+cell4.className = "cell col-4 text-center border border-4";
 
 //cell5 variable (middle right)
-let cell5 = document.createElement("h1");
-gameBoard.appendChild(cell5);
-cell5.innerText = ""
-cell5.className = "cell col-4 d-flex justify-content-center align-items-center border border-4";
+let cell5 = document.createElement("button");
+row.appendChild(cell5);
+cell5.innerText = "";
+cell5.className = "cell col-4 text-center border border-4";
 
 //cell6 variable (bottom left)
-let cell6 = document.createElement("h1");
-gameBoard.appendChild(cell6);
-cell6.innerText = ""
-cell6.className = "cell col-4 d-flex justify-content-center align-items-center border border-4";
+let cell6 = document.createElement("button");
+row.appendChild(cell6);
+cell6.innerText = "";
+cell6.className = "cell col-4 text-center border border-4";
 
 //cell7 variable (bottom center)
-let cell7 = document.createElement("h1");
-gameBoard.appendChild(cell7);
-cell7.innerText = ""
-cell7.className = "cell col-4 d-flex justify-content-center align-items-center border border-4";
+let cell7 = document.createElement("button");
+row.appendChild(cell7);
+cell7.innerText = "";
+cell7.className = "cell col-4 text-center border border-4";
 
 //cell8 variable (bottom right)
-let cell8 = document.createElement("h1");
-gameBoard.appendChild(cell8);
-cell8.innerText = ""
-cell8.className = "cell col-4 d-flex justify-content-center align-items-center border border-4";
+let cell8 = document.createElement("button");
+row.appendChild(cell8);
+cell8.innerText = "";
+cell8.className = "cell col-4 text-center border border-4";
 
-//-------------------------------------------------------------------//
-
+//restartBtn should call initializeBoard()
+//Should only appear once endGame() has been called
 let restartBtn = document.createElement("button");
-gameBoard.appendChild(restartBtn);
+appContainer.appendChild(restartBtn);
 restartBtn.innerText = "Restart Game"
-restartBtn.className = "col-2 d-flex justify-content-center align-items-center border border-4";
+restartBtn.className = "restartBtn col-4 text-center border border-4 m-4 p-3";
 
 
+//------------------------winConditions object------------------------//
+//winConditions establishes certain box groups that constitute a win
+//An object containing array of arrays
+//Sits within checkWin() function
+let winConditions = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+]
 
-//------------------------init() function------------------------//
-//init() function to initialize game board
+let options = ["", "", "", "", "", "", "", ""]
+//------------------------------------------------------------------//
+
+
+//------------------------initializeBoard() function------------------------//
+//initializeBoard() function to initialize game board
 //Render game board with empty squares
 //Each square should have listeners for click event
 //Restart button will appear once either player wins or game draws
 //Restart button will call init() to return game to empty squares
-function initializeBoard() {
-
-}
+/* function initializeBoard() {
+} */
 //--------------------------------------------------------------//
 
 
 //------------------------Game State------------------------//
-let gameState = 
+//Creates object named gameState
+let gameState = {
+    //Sets turnNubmer to 0
+    turnNumber: 0,
+    player: 1,
+    boardState: [],
+    activeStatus: true
+}
+
 //------------------------------------------------------------------//
+//Targets cell classes
+gameState.boardState = document.querySelectorAll(".cell")
+console.log(gameState.boardState);
+
 
 
 //------------------------checkWin() function------------------------//
@@ -94,23 +124,13 @@ let gameState =
 //Calls winConditions to see if player has won
 //Should run on every move
 function checkWin() {
-
+    for (i = 0; i < winConditions.length; i++) {
+        if (winConditions = true) {
+            endGame();
+        }
+    }
 }
-//------------------------winConditions object------------------------//
-//winConditions establishes certain box groups that constitute a win
-//An object containing array of arrays
-//Sits within checkWin() function
-    let winConditions = [
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8],
-        [0, 4, 8],
-        [2, 4, 6]
-    ]
-//------------------------------------------------------------------//
+console.log(checkWin);
 
 
 //------------------------endGame() function------------------------//
@@ -126,15 +146,42 @@ function endGame() {
 //makeMove() adds the current player to the square they clicked
 //Should initiate checkWin() on every move
 //Should initiate switchPlayer()
+//
+
+//Creates makeMove function
 function makeMove() {
-
-
-//------------------------switchPlayer() function------------------------//
-//Visual indicator to show which player's turn it is
-    function switchPlayer() {
-
+    //Loops over 
+    for (let i = 0; i < gameState.boardState.length; i++) {
+        gameState.boardState[i].addEventListener('click', function () {
+            checkTurn();
+            if (gameState.player == 1) {
+                gameState.boardState[i].innerText = "X";
+                gameState.turnNumber++
+            } else {
+                gameState.boardState[i].innerText = "O";
+                gameState.turnNumber++
+            }
+            console.log(gameState.turnNumber);
+            console.log(gameState.boardState);
+        })
+        //Figure out how to remove eventListener from square that was just clicked
+        checkWin();
     }
+    
 }
+makeMove();
+console.log(gameState.boardState);
+//------------------------checkTurn() function------------------------//
+//Visual indicator to show which player's turn it is
+function checkTurn() {
+    if (gameState.turnNumber % 2 == 0) {
+        gameState.player = 1;
+    } else {
+        gameState.player = 2;
+    }
+
+}
+
 //-------------------------------------------------------------------//
 
 
@@ -142,21 +189,11 @@ function makeMove() {
 //------------------------restartGame function------------------------//
 //Should call init() to reset board to on load state
 function restartGame() {
-
+    
 }
 //-------------------------------------------------------------------//
 
-
-//------------------------click events for each square------------------------//
-cell0.addEventListener("click", makeMove);
-cell1.addEventListener("click", makeMove);
-cell2.addEventListener("click", makeMove);
-cell3.addEventListener("click", makeMove);
-cell4.addEventListener("click", makeMove);
-cell5.addEventListener("click", makeMove);
-cell6.addEventListener("click", makeMove);
-cell7.addEventListener("click", makeMove);
-cell8.addEventListener("click", makeMove);
+//------------------------click event for restartGame------------------------//
 //Should call init() to reset board to on load state
 restartGameBtn.addEventListener("click", restartGame);
 //---------------------------------------------------------------------------//
