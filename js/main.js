@@ -87,19 +87,8 @@ let winConditions = [
     [2, 4, 6]
 ]
 
-let options = ["", "", "", "", "", "", "", ""]
+/* let options = ["", "", "", "", "", "", "", ""] */
 //------------------------------------------------------------------//
-
-
-//------------------------initializeBoard() function------------------------//
-//initializeBoard() function to initialize game board
-//Render game board with empty squares
-//Each square should have listeners for click event
-//Restart button will appear once either player wins or game draws
-//Restart button will call init() to return game to empty squares
-/* function initializeBoard() {
-} */
-//--------------------------------------------------------------//
 
 
 //------------------------Game State------------------------//
@@ -124,10 +113,33 @@ console.log(gameState.boardState);
 //Calls winConditions to see if player has won
 //Should run on every move
 function checkWin() {
-    for (i = 0; i < winConditions.length; i++) {
-        if (winConditions = true) {
+    for (let i = 0; i < winConditions.length; i++) {
+        let tileOne = gameState.boardState[winConditions[i][0]].innerText;
+        let tileTwo = gameState.boardState[winConditions[i][1]].innerText
+        let tileThree = gameState.boardState[winConditions[i][2]].innerText
+        if (
+            tileOne && 
+            tileTwo == tileOne &&
+            tileThree == tileOne
+         ) {
             endGame();
         }
+/*         let markCount = 0;
+        for (let j = 0; j < winConditions[i].length; j++) {
+            console.log(gameState.boardState[winConditions[i][j]]);
+            markCount += 1;
+            console.log(markCount);
+            if (gameState.boardState)
+            if (gameState.boardState[i][j]?.innerText == true) {
+                markCount++
+                console.log(markCount);
+            }
+           
+            if (markCount == 3) {
+                endGame();
+            }
+        }
+        markCount = 0; */
     }
 }
 console.log(checkWin);
@@ -137,7 +149,17 @@ console.log(checkWin);
 //Displays the winner of the game
 //Removes eventListeners from all tiles
 function endGame() {
-
+    gameState.activeStatus = false;
+    if (gameState.player == 1) {
+        console.log("Player X wins!");
+    } else {
+        console.log("Player O wins");
+    }
+    if (!gameState.activeStatus) {
+       gameState.boardState.map(tile => (
+        tile.removeEventListener('click', makeMove)
+       ));
+    }
 }
 //-------------------------------------------------------------------//
 
@@ -163,7 +185,8 @@ function makeMove() {
             }
             console.log(gameState.turnNumber);
             console.log(gameState.boardState);
-        })
+            checkWin();
+        }, { once: true });
         //Figure out how to remove eventListener from square that was just clicked
         checkWin();
     }
@@ -171,6 +194,7 @@ function makeMove() {
 }
 makeMove();
 console.log(gameState.boardState);
+
 //------------------------checkTurn() function------------------------//
 //Visual indicator to show which player's turn it is
 function checkTurn() {
