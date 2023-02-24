@@ -150,16 +150,19 @@ console.log(checkWin);
 //Removes eventListeners from all tiles
 function endGame() {
     gameState.activeStatus = false;
+    if (!gameState.activeStatus) {
+        for (let i = 0; i < gameState.boardState.length; i++) {
+             gameState.boardState[i].disabled = true;
+        }
+     }
     if (gameState.player == 1) {
+        //alert("Player X wins");
         console.log("Player X wins!");
     } else {
+        //alert("Player O wins");
         console.log("Player O wins");
     }
-    if (!gameState.activeStatus) {
-       gameState.boardState.map(tile => (
-        tile.removeEventListener('click', makeMove)
-       ));
-    }
+
 }
 //-------------------------------------------------------------------//
 
